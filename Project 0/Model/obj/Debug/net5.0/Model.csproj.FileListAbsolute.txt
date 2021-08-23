@@ -1,0 +1,12 @@
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.csproj.AssemblyReference.cache
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.AssemblyInfoInputs.cache
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.AssemblyInfo.cs
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.csproj.CoreCompileInputs.cache
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\Model.deps.json
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\Model.dll
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\ref\Model.dll
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\Model.pdb
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.dll
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\ref\Model.dll
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.pdb
