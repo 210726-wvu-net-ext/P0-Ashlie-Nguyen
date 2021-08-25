@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace DL.Entities
 {
+    /// <summary>
+    /// Store data from SQL User table
+    /// No FK. Referenced by Review table.
+    /// </summary>
     public partial class User
     {
         public User()

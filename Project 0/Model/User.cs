@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Model
 {
+    /// <summary>
+    /// Store data from SQL User table
+    /// No FK. Referenced by Review table.
+    /// </summary>
     public class User
     {
         public User() {}

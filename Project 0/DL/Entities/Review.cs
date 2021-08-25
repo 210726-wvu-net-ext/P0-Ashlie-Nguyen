@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace DL.Entities
 {
+    /// <summary>
+    /// Store data from Review table
+    /// 2 FK. Not referenced by other tables.
+    /// </summary>
     public partial class Review
     {
         // These properties are on the Review table in SQL

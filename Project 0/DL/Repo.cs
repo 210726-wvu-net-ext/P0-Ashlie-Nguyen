@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace DL
 {
+    /// <summary>
+    /// Methods to get and set data on SQL server 
+    /// </summary>
     public class Repo : IRepo
     {
         private dbContext _context;
@@ -44,7 +47,13 @@ namespace DL
             for (int i = 0; i < R.Count; i++)
             {
                 R[i] = GetRestaurantDetails(R[i].Restaurantname);
+                // this recalculates the average rating for the referenced Restaurant
+                //float newrating = GetRestaurantDetails(review.Restaurantname).Rating;
+                var old = _context.Restaurant.First(a => a.Restaurantname == R[i].Restaurantname);
+                if (old.Rating != R[i].Rating)
+                    old.Rating = R[i].Rating; // this updates the Restaurant rating on the Server
             }
+            _context.SaveChanges();
             return R;
         }
         
@@ -97,6 +106,12 @@ namespace DL
 
         public Model.User AddAUser(Model.User user)
         {
+            Model.User Userobj = GetUser(user.Username); // this checks whether the Username is already taken
+            if (Userobj.Username != null){
+                return new Model.User(); // this returns an empty user object if the username is already taken
+            }
+            else
+            {
             _context.User.Add(
                 new Entities.User{
                     CreatedOn = user.CreatedOn,
@@ -108,6 +123,7 @@ namespace DL
             _context.SaveChanges();
 
             return user;
+            }
         }
 
         public Model.Review AddAReview(Model.Review review)
@@ -121,7 +137,11 @@ namespace DL
                     Reviewtext = review.Reviewtext
                 }
             );
-            GetRestaurantDetails(review.Restaurantname);
+            // this recalculates the average rating for the referenced Restaurant
+            float newrating = GetRestaurantDetails(review.Restaurantname).Rating;
+            var old = _context.Restaurant.First(a => a.Restaurantname == review.Restaurantname);
+            if (old.Rating != newrating)
+                old.Rating = newrating; // this updates the Restaurant rating on the Server
             _context.SaveChanges();
 
             return review;

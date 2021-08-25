@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace DL.Entities
 {
+    /// <summary>
+    /// Store data from Restaurant table
+    /// No FK. Referenced by Review table.
+    /// </summary>
     public partial class Restaurant
     {
         public Restaurant()

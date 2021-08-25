@@ -5,15 +5,28 @@ using System.Collections.Generic;
 
 namespace UI
 {
+    /// <summary>
+    /// This UI class presents multiple menus and options for the users to navigate 
+    /// BL methods are called to get and set SQL data and store the result to model objects
+    /// </summary>
     public class MainMenu : IMenu
     {
         private IBL _bl; // this holds methods for getting and setting data
-        private User _user; // this holds the current user
+        private User _user = new User(); // this holds the current user
         public MainMenu(IBL bl)
         {
             _bl = bl;
         }
 
+        /// <summary>
+        /// First method called in MainMenu
+        /// </summary>
+        /// <param>
+        /// none
+        /// </param>
+        /// <returns>
+        /// void
+        /// </returns>
         public void Start()
         {
             bool repeat = true;
@@ -74,30 +87,49 @@ namespace UI
             string stradmin = ""; // this ensures stradmin has a value
             bool admin = false;
             // this creates an object of the User class type from the Model Namespace
-            Model.User userToAdd; 
+            Model.User userToAdd;
+            Model.User userUpdated;
+            int loginfail = 0;
             
+            Console.Clear();
             Console.WriteLine("Add new user");
             
             do
             {
-                Console.Write("Username: ");
-                Username = Console.ReadLine();
-                Console.Write("Password: ");
-                Password = Console.ReadLine();
-                if (_user.IsAdmin) {
-                    // only admins can create other admins
-                    Console.Write("Admin? ");
-                    stradmin = Console.ReadLine();
-                }
-            } while(String.IsNullOrWhiteSpace(Username) && String.IsNullOrWhiteSpace(Password));
-            // the while condition verifies that some input is entered for Username and Password
+                do
+                {
+                    Console.Write("Username: ");
+                    Username = Console.ReadLine();
+                    Console.Write("Password: ");
+                    Password = Console.ReadLine();
+                    if (_user.IsAdmin) {
+                        // only admins can create other admins
+                        Console.Write("Admin? ");
+                        stradmin = Console.ReadLine();
+                    }
+                } while(String.IsNullOrWhiteSpace(Username) && String.IsNullOrWhiteSpace(Password));
+                // the while condition verifies that some input is entered for Username and Password
 
-            if (stradmin == "Y" || stradmin == "y" || stradmin == "Yes" || stradmin == "yes" || stradmin == "1" || stradmin == "True" || stradmin == "true" || stradmin == "TRUE")
-                admin = true;
-            userToAdd = new Model.User(Username, Password, admin);
-            userToAdd = _bl.AddAUser(userToAdd);
+                if (stradmin == "Y" || stradmin == "y" || stradmin == "Yes" || stradmin == "yes" || stradmin == "1" || stradmin == "True" || stradmin == "true" || stradmin == "TRUE")
+                    admin = true;
+                userToAdd = new Model.User(Username, Password, admin);
+                userUpdated = _bl.AddAUser(userToAdd); // this returns an empty User if the User already exists
+                if (userUpdated.Username == null) // null if the User already exists
+                {
+                    Console.WriteLine($"{userToAdd.Username} is already taken. Please enter another username.");
+                    loginfail += 1; // count # of failed logins
+                    if (loginfail > 2)
+                    {
+                        Console.WriteLine("You have failed too many times");
+                        return;
+                    }
+                }
+            } while (userUpdated.Username == null);
+
             if (this._user == null) // check if there is no currently logged in user
+            {
                 this._user = userToAdd; // set the currently logged in user to the newly created user
+            }
 
             Console.WriteLine($"{userToAdd.Username} was successfully added!");
             Menu(); // go to Menu
@@ -229,9 +261,9 @@ namespace UI
                     Console.WriteLine("{0} Stars, by {1}",reviews[i].Rating,reviews[i].Username);
                     Console.WriteLine("{0}\n",reviews[i].Reviewtext); // output the comment
                 }
-                Console.WriteLine("Add a Review?");
+                Console.WriteLine("\nAdd a Review?");
                 input = Console.ReadLine(); // get user response
-                if (input == "Y" || input == "y" || input == "Yes" || input == "yes")
+                if (input == "Y" || input == "y" || input == "yes")
                     AddReview(restaurant.Restaurantname); // pass in restaurant name
             }
             else
@@ -280,10 +312,15 @@ namespace UI
             }
             // get list of restaurants matching min and max filter
             List<Restaurant> restaurants = _bl.GetRestaurantsByRating(min, max);
+            if (restaurants.Count > 0)
+                Console.WriteLine();
             foreach (Restaurant r in restaurants)
             {
-                // output restaurant name, zip code, and rating for each restaurant
-                Console.WriteLine("{0} {1} {2}",r.Restaurantname, r.Zipcode, r.Rating);
+                // output restaurant rating, zip code, and name for each restaurant
+                if (r.Rating > 0)
+                    Console.WriteLine("Rating: {0:N1}   Zip code: {1}   Name: {2}", r.Rating, r.Zipcode, r.Restaurantname);
+                else
+                    Console.WriteLine("Rating: ---   Zip code: {0}   Name: {2}", r.Zipcode, r.Restaurantname);
             }
         }
 
@@ -295,11 +332,14 @@ namespace UI
             // get list of restaurants in zip code
             List<Restaurant> restaurants = _bl.GetRestaurantsByZip(zip);
             if (restaurants.Count > 0)
-                Console.WriteLine("\nRating Restaurant");
+                Console.WriteLine();
             foreach (Restaurant r in restaurants)
             {
-                // output restaurant name, zip code, and rating for each restaurant
-                Console.WriteLine("{0:N1} {1}", r.Rating, r.Restaurantname);
+                // output restaurant rating and name for each restaurant
+                if (r.Rating > 0)
+                    Console.WriteLine("Rating: {0:N1}   Restaurant: {1}", r.Rating, r.Restaurantname);
+                else
+                    Console.WriteLine("Rating: ---   Restaurant: {0}", r.Restaurantname);
             }
         }
         
@@ -324,9 +364,9 @@ namespace UI
             User User = _bl.GetUser(input);
             if(User.Username is null) // check the user exists
             {
-                Console.WriteLine($"No exact match for {input}");
+                Console.WriteLine($"\nNo exact match for '{input}'");
                 List<User> users = _bl.GetUsers(input);
-                Console.WriteLine("{0} results found containing '{1}':",users.Count,input);
+                Console.WriteLine("\n{0} results found containing '{1}':",users.Count,input);
                 foreach (User user in users)
                 {
                     Console.WriteLine("{0}",user.Username);

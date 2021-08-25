@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UI</name>
+    </assembly>
+    <members>
+        <member name="T:UI.MainMenu">
+            <summary>
+            This UI class presents multiple menus and options for the users to navigate 
+            BL methods are called to get and set SQL data and store the result to model objects
+            </summary>
+        </member>
+        <member name="M:UI.MainMenu.Start">
+            <summary>
+            First method called in MainMenu
+            </summary>
+            <param>
+            none
+            </param>
+            <returns>
+            void
+            </returns>
+        </member>
+    </members>
+</doc>

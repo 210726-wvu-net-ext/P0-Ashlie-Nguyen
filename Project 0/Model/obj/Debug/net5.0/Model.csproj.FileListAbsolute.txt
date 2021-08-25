@@ -10,3 +10,4 @@ C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\Model.pdb
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.dll
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\ref\Model.dll
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\obj\Debug\net5.0\Model.pdb
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\Model\bin\Debug\net5.0\Model-doc.xml

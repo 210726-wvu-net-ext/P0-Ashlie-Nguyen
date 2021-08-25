@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 namespace BL
 {
+    /// <summary>
+    /// all of the following 11 methods are pass through methods
+    /// parameters from UI are sent to DL
+    /// return type data is sent back from DL to UI
+    /// </summary>
     public class BL : IBL // BL implements IBL
     {
         private IRepo _repo; // _repo is a local field for storing data from DL
@@ -13,10 +18,6 @@ namespace BL
             _repo = repo; // this stores DL object in local field
         }
         
-        // all of the following 11 methods are pass through methods
-        // parameters from UI are sent to DL
-        // return type data is sent back from DL to UI
-
         public Restaurant GetRestaurantDetails(string name) // this BL method gets a string from UI
         {
             // the string parameter is passed on to DL and a restaurant object is received

@@ -2,7 +2,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,visualstudiocode,dotnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,visualstudiocode,dotnetcore
 
-appsettings.json
+UI/appsettings.json
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and

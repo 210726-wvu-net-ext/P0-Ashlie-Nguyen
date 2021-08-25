@@ -2,6 +2,10 @@ using System;
 
 namespace Model
 {
+    /// <summary>
+    /// Store data from SQL Review table
+    /// 2 FK.  Not referenced by other tables.
+    /// </summary>
     public class Review
     {
         public Review() {}

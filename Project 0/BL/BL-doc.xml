@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BL</name>
+    </assembly>
+    <members>
+        <member name="T:BL.BL">
+            <summary>
+            all of the following 11 methods are pass through methods
+            parameters from UI are sent to DL
+            return type data is sent back from DL to UI
+            </summary>
+        </member>
+    </members>
+</doc>

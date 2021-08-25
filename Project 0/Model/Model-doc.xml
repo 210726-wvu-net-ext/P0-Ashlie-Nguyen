@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Model</name>
+    </assembly>
+    <members>
+        <member name="T:Model.Restaurant">
+            <summary>
+            Store data from SQL Restaurant table
+            No FK. Referenced by Review table.
+            </summary>
+        </member>
+        <member name="T:Model.Review">
+            <summary>
+            Store data from SQL Review table
+            2 FK.  Not referenced by other tables.
+            </summary>
+        </member>
+        <member name="T:Model.User">
+            <summary>
+            Store data from SQL User table
+            No FK. Referenced by Review table.
+            </summary>
+        </member>
+    </members>
+</doc>

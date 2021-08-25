@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <DocumentationFile>$(AssemblyName)-doc.xml</DocumentationFile>
+        <!--disable missing comment warning-->
+        <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
 </Project>

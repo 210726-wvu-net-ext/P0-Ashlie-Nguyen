@@ -16,3 +16,4 @@ C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\DL\obj\Debug\net5.0\DL.dll
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\DL\obj\Debug\net5.0\ref\DL.dll
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\DL\obj\Debug\net5.0\DL.pdb
 C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\DL\obj\Debug\net5.0\DL.genruntimeconfig.cache
+C:\Users\anh_v\P0-Ashlie-Nguyen\Project 0\DL\bin\Debug\net5.0\DL-doc.xml
