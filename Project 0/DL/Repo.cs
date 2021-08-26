@@ -91,6 +91,12 @@ namespace DL
 
         public Model.Restaurant AddARestaurant(Model.Restaurant restaurant)
         {
+            Model.Restaurant restaurantobj = GetRestaurantDetails(restaurant.Restaurantname); // this checks whether the Restaurantname is already taken
+            if (restaurantobj.Restaurantname != null){
+                return new Model.Restaurant(); // this returns an empty restaurant object if the username is already taken
+            }
+            else
+            {
             _context.Restaurant.Add(
                 new Entities.Restaurant {
                     CreatedOn = restaurant.CreatedOn,
@@ -102,13 +108,16 @@ namespace DL
             _context.SaveChanges();
 
             return restaurant;
+            }
         }
 
         public Model.User AddAUser(Model.User user)
         {
-            Model.User Userobj = GetUser(user.Username); // this checks whether the Username is already taken
+            // this checks whether the Username is already taken
+            Model.User Userobj = GetUser(user.Username);
             if (Userobj.Username != null){
-                return new Model.User(); // this returns an empty user object if the username is already taken
+                // this returns an empty user object if the username is already taken
+                return new Model.User();
             }
             else
             {

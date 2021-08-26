@@ -17,7 +17,7 @@ namespace Test
     {
         private readonly DbContextOptions<Entity.dbContext> options;
 
-        private DL.IRepo _repo;
+        private BL.IBL _bl;
 
         public UnitTest1()
         {
@@ -37,7 +37,7 @@ namespace Test
 
             var testcontext = new Entity.dbContext(options);
             
-            _repo = new DL.Repo(testcontext);
+            _bl = new BL.BL(new DL.Repo(testcontext));
         }
         
     // private void Seed()
@@ -71,13 +71,13 @@ namespace Test
         public void PassingTest3()
         {
             bool answer = Rating("ihop") < 4;
-            Assert.Equal(false, answer);
+            Assert.Equal(true, answer);
         }
 
         [Fact]
         public void PassingTest4()
         {
-            List<Model.Restaurant> restaurants = _repo.GetAllRestaurants();
+            List<Model.Restaurant> restaurants = _bl.GetAllRestaurants();
             Assert.Equal(true, restaurants.Count > 2);
         }
         
@@ -90,38 +90,41 @@ namespace Test
         [Fact]
         public void PassingTest6()
         {
-            List<Model.Review> reviews = _repo.GetReviewsByRestaurant("Arbys");
-            Assert.Equal(3, reviews.Count);
+            List<Model.Review> reviews = _bl.GetReviewsByRestaurant("Arbys");
+            Assert.Equal(true, reviews.Count > 3);
         }
 
         [Fact]
-        public void FailingTest1()
+        public void PassingTest7()
         {
-            Assert.Equal(3.33, Rating("Arbys"));
+            List<Model.Review> reviewlist = _bl.GetReviewsByRestaurant("arbys");
+            Assert.Equal(true, reviewlist.Count > 1);
         }
 
         [Fact]
-        public void FailingTest2()
+        public void PassingTest8()
         {
-            Assert.Equal(3.3, Rating("Ihop"));
+            List<Model.Review> reviewlist = _bl.GetReviewsByRestaurant("Outback Steakhouse");
+            Assert.Equal(1, reviewlist.Count);
         }
 
         [Fact]
-        public void FailingTest3()
+        public void PassingTest9()
         {
-            Model.Restaurant obj = _repo.GetRestaurantDetails("");
-            Assert.Equal(null, obj);
+            Model.Restaurant newobj = new Model.Restaurant();
+            Model.Restaurant emptyobj = _bl.GetRestaurantDetails("");
+            Assert.Equal(newobj.Restaurantname, emptyobj.Restaurantname);
         }
 
         [Fact]
-        public void FailingTest4()
+        public void PassingTest10()
         {
-            Assert.Equal(4, Rating("arbys"));
+            Assert.Equal(true, _bl.GetUser("ashlie").IsAdmin);
         }
 
         public float Rating(string name)
         {
-            return _repo.GetRestaurantDetails(name).Rating;
+            return _bl.GetRestaurantDetails(name).Rating;
         }
     }
 }

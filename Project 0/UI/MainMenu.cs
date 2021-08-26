@@ -32,17 +32,12 @@ namespace UI
             bool repeat = true;
             do
             {
-                Console.WriteLine("Select one of the following functions:");
-                Console.WriteLine("0. Exit");
+                Console.WriteLine("Select one of the following options:");
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Create account");
+                Console.WriteLine("3. Exit");
                 string Input = Console.ReadLine();
                 switch (Input) {
-                    case "0":
-                        Console.WriteLine("Goodbye!");
-                        repeat = false; // escape the do..while loop
-                    break;
-
                     case "1":
                         repeat = false;
                         Login(); // go to Login
@@ -51,6 +46,11 @@ namespace UI
                     case "2":
                         repeat = false;
                         AddUser(); // go to AddUser
+                    break;
+
+                    case "3":
+                        Console.WriteLine("Goodbye!");
+                        repeat = false; // escape the do..while loop
                     break;
 
                     default:
@@ -91,8 +91,8 @@ namespace UI
             Model.User userUpdated;
             int loginfail = 0;
             
-            Console.Clear();
-            Console.WriteLine("Add new user");
+            // Console.Clear();
+            Console.WriteLine("\nAdd new user");
             
             do
             {
@@ -139,62 +139,97 @@ namespace UI
             bool repeat = true;
             do
             {
-                Console.WriteLine("\nSelect one of the following functions:");
-                Console.WriteLine("0. Exit");
-                Console.WriteLine("1. Logout");
-                Console.WriteLine("2. Search restaurant (by name, rating, or zip code)");
-                Console.WriteLine("3. Add Restaurant");
-                Console.WriteLine("4. Search user");
+                // Console.Clear();
+                Console.WriteLine("\nSelect one of the following options:");
+                Console.WriteLine("1. Search restaurant (by name, rating, or zip code)");
+                Console.WriteLine("2. Add Restaurant");
                 if (_user.IsAdmin) {
-                    Console.WriteLine("5. Add a new user");
+                    Console.WriteLine("3. Search user");
+                    Console.WriteLine("4. Add a new user");
+                    Console.WriteLine("5. Logout");
+                    Console.WriteLine("6. Exit");
+                }
+                else
+                {
+                    Console.WriteLine("3. Exit");
+                    Console.WriteLine("4. Logout");
                 }
                 string Input = Console.ReadLine();
                 switch (Input) {
-                    case "0":
-                        Console.WriteLine("Goodbye!");
-                        repeat = false;
-                    break;
-
                     case "1":
-                        Start();
-                        repeat = false;
-                    break;
-
-                    case "2":
                         SearchRestaurant();
                         repeat = false;
                     break;
 
-                    case "3":
+                    case "2":
                         AddRestaurant();
                         // this method will return to the loop when complete
                     break;
 
-                    case "4":
-                        // exception handling
-                        try
+                    case "3":
+                        if (_user.IsAdmin)
                         {
-                            SearchUser();
+                            // exception handling
+                            try
+                            {
+                                SearchUser();
+                            }
+                                catch (Exception ex)
+                            {
+                                Console.WriteLine(ex);
+                            }
                         }
-                            catch (Exception ex)
+                        else
                         {
-                            Console.WriteLine(ex);
+                            Console.WriteLine("Goodbye!");
+                            repeat = false;
+                        }
+                    break;
+
+                    case "4":
+                        if (_user.IsAdmin)
+                        {
+                            AddUser();
+                            repeat = false;
+                        }
+                        else
+                        {
+                            Start();
+                            repeat = false;
                         }
                     break;
 
                     case "5":
                         if (_user.IsAdmin)
-                            AddUser();
+                        {
+                            Start();
+                            repeat = false;
+                        }
                         else
-                            Console.WriteLine("Please input a number from 0 to 4.");
+                        {
+                            Console.WriteLine("Please input a number from 1 to 4.");
                             // non-admins do not have access to this option
+                        }
+                    break;
+
+                    case "6":
+                        if (_user.IsAdmin)
+                        {
+                            Console.WriteLine("Goodbye!");
+                            repeat = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please input a number from 1 to 4.");
+                            // non-admins do not have access to this option
+                        }
                     break;
 
                     default:
                         if (_user.IsAdmin)
-                            Console.WriteLine("Please input a number from 0 to 5.");
+                            Console.WriteLine("Please input a number from 1 to 6.");
                         else
-                            Console.WriteLine("Please input a number from 0 to 4.");
+                            Console.WriteLine("Please input a number from 1 to 4.");
                     break;
                 }
             } while (repeat);
@@ -204,15 +239,16 @@ namespace UI
             bool repeat = true;
             do
             {
-                Console.WriteLine("\nSelect one of the following functions:");
-                Console.WriteLine("0. Exit");
+                // Console.Clear();
+                Console.WriteLine("\nSelect one of the following options:");
                 Console.WriteLine("1. Search by restaurant name");
                 Console.WriteLine("2. Search by restaurant rating");
                 Console.WriteLine("3. Search by restaurant zip code");
                 Console.WriteLine("4. Return to previous menu");
+                Console.WriteLine("5. Exit");
                 string Input = Console.ReadLine();
                 switch (Input) {
-                    case "0":
+                    case "5":
                         Console.WriteLine("Goodbye!");
                         repeat = false;
                     break;
@@ -353,7 +389,10 @@ namespace UI
             zip = Console.ReadLine(); // get zip code
             // create a restaurant object with name and zip code initialized
             Restaurant restaurant = _bl.AddARestaurant(new Restaurant(name, zip));
-            Console.WriteLine("{0} added! Yay!", restaurant.Restaurantname);
+            if (restaurant.Restaurantname == null) // null if the Restaurant already exists
+                Console.WriteLine($"{restaurant.Restaurantname} already exists. Thanks.");
+            else
+                Console.WriteLine("{0} added! Yay!", restaurant.Restaurantname);
         }
 
         public void SearchUser()

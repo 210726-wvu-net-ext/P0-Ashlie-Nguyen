@@ -3,6 +3,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,visualstudiocode,dotnetcore
 
 UI/appsettings.json
+bin/
+obj/
 
 ### Csharp ###
 ## Ignore Visual Studio temporary files, build results, and
