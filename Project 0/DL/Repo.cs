@@ -16,7 +16,15 @@ namespace DL
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Get Restaurant details
+        /// </summary>
+        /// <param>
+        /// string
+        /// </param>
+        /// <returns>
+        /// Model.Restaurant
+        /// </returns>
         public Model.Restaurant GetRestaurantDetails(string name)
         {
             Entities.Restaurant Restaurant = _context.Restaurant.FirstOrDefault(
