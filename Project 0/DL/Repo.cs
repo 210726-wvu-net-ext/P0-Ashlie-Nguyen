@@ -16,8 +16,9 @@ namespace DL
         {
             _context = context;
         }
+
         /// <summary>
-        /// Get Restaurant details
+        /// Get Restaurant details by passing in restaurant name
         /// </summary>
         /// <param>
         /// string
