@@ -60,7 +60,7 @@ namespace UI
             } while (repeat);
         }
 
-        private void Login()
+        public void Login()
         {
             Console.Write("\nUsername: ");
             string Username = Console.ReadLine();
@@ -80,7 +80,7 @@ namespace UI
                 Console.WriteLine("Invalid Username"); // validation
         }
 
-        private void AddUser()
+        public void AddUser()
         {
             string Username;
             string Password;

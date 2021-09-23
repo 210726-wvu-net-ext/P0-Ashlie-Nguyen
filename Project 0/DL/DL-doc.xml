@@ -33,5 +33,16 @@
             Methods to get and set data on SQL server 
             </summary>
         </member>
+        <member name="M:DL.Repo.GetRestaurantDetails(System.String)">
+            <summary>
+            Get Restaurant details by passing in restaurant name
+            </summary>
+            <param>
+            string
+            </param>
+            <returns>
+            Model.Restaurant
+            </returns>
+        </member>
     </members>
 </doc>
