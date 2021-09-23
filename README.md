@@ -12,7 +12,7 @@
 
 ## Features
 
-* Search for stores by location, name, or zip code
+* Search for stores by location, name, or store rating
 * Browse reviews by store or by user
 * Create reviews
 * Create user accounts
@@ -20,7 +20,7 @@
 
 ## Usage
 
-> To run locally open P1/UI and execute 'dotnet run'
+> To run locally open 'Project 0'/UI and execute 'dotnet run'
 
 ## Contributors
 
